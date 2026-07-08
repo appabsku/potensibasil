@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -366,7 +367,7 @@ body { font-family:'Inter',sans-serif; background:#f2f6fc; min-height:100vh; pad
   // Isi dengan URL Web App hasil deploy Google Apps Script (berakhiran /exec).
   // Selama masih kosong, klik ceklist hanya mengubah tampilan sementara dan TIDAK
   // mengubah warna di Google Sheets.
-  const APPS_SCRIPT_URL = '';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqYK4snE__rJEaeuHK0crKB-QaPZeAXxgBz_uEarV74Q5qm1NM-7ZgH_WIKVLQ6j-i/exec';
 
   // DOM refs
   const statusDot = document.getElementById('statusDot');
@@ -1138,7 +1139,13 @@ body { font-family:'Inter',sans-serif; background:#f2f6fc; min-height:100vh; pad
     try {
       const res = await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
-        body: JSON.stringify({ no: item.no, nama: item.nama, action: newValue ? 'check' : 'uncheck' })
+        body: JSON.stringify({
+          spreadsheetId: SPREADSHEET_ID,
+          sheetName: SHEET_NAME,
+          no: item.no,
+          nama: item.nama,
+          action: newValue ? 'check' : 'uncheck'
+        })
       });
       const result = await res.json().catch(() => ({ success: false, error: 'Respons tidak valid' }));
       if (!result.success) throw new Error(result.error || 'Gagal update sheet');
