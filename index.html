@@ -1264,11 +1264,11 @@ body { font-family:'Inter',sans-serif; background:#f2f6fc; min-height:100vh; pad
   if (isSourceConfirmed()) {
     openMainApp();
     fetchAndRender();
-    setInterval(() => { if (!isFetching) fetchAndRender(); }, 60000);
+    setInterval(() => { if (!isFetching) fetchAndRender(); }, 120000);
   } else {
     sourceGateWrap.style.display = '';
     mainAppWrap.style.display = 'none';
-    setInterval(() => { if (!isFetching && isSourceConfirmed()) fetchAndRender(); }, 60000);
+    setInterval(() => { if (!isFetching && isSourceConfirmed()) fetchAndRender(); }, 120000);
   }
 
   // Refresh instan begitu app dibuka/aktif lagi (mis. user pindah ke WhatsApp lalu balik lagi),
