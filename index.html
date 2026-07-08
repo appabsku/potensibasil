@@ -367,7 +367,7 @@ body { font-family:'Inter',sans-serif; background:#f2f6fc; min-height:100vh; pad
   // Isi dengan URL Web App hasil deploy Google Apps Script (berakhiran /exec).
   // Selama masih kosong, klik ceklist hanya mengubah tampilan sementara dan TIDAK
   // mengubah warna di Google Sheets.
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbynfloMSFGk9t7vDfSqwV-XwLdYURIkjcnqr-3V2NwUSRB7sC3SGbfxMwUN2d6EJqiu/exec';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwbowoHFmAdEbbEmj1zcmnnh7CIVcgH5Br20EX_HsFMMOo_TzTeQWOMsJODpiWuMRw_/exec';
 
   // DOM refs
   const statusDot = document.getElementById('statusDot');
@@ -1149,7 +1149,9 @@ body { font-family:'Inter',sans-serif; background:#f2f6fc; min-height:100vh; pad
       });
       const result = await res.json().catch(() => ({ success: false, error: 'Respons tidak valid' }));
       if (!result.success) throw new Error(result.error || 'Gagal update sheet');
-      // Sinkron dengan warna sheet yang sebenarnya di refresh berikutnya
+      // Auto refresh: ambil ulang data dari Sheets supaya warna, total basil,
+      // dan urutan langsung sinkron dengan kondisi sheet yang sebenarnya.
+      await fetchAndRender();
     } catch (err) {
       // Gagal -> kembalikan status semula
       item.sudahBayar = prevValue;
