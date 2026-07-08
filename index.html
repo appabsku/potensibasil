@@ -1264,7 +1264,7 @@ body { font-family:'Inter',sans-serif; background:#f2f6fc; min-height:100vh; pad
   if (isSourceConfirmed()) {
     openMainApp();
     fetchAndRender();
-    setInterval(() => { if (!isFetching) fetchAndRender(); }, 5000);
+    setInterval(() => { if (!isFetching) fetchAndRender(); }, 30000);
   } else {
     sourceGateWrap.style.display = '';
     mainAppWrap.style.display = 'none';
